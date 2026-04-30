@@ -18,6 +18,7 @@ app.use('/api/auth', authRoutes);
 app.use('/auth', authRoutes);
 app.use('/', authRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/chat', chatRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {
