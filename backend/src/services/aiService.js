@@ -98,36 +98,36 @@ const getGeminiResponse = async (message) => {
   return data.candidates?.[0]?.output?.trim() || data.output?.[0]?.content?.[0]?.text?.trim() || 'No response from Gemini model';
 };
 
-const getOpenAIResponse = async (message) => {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    return `Mock OpenAI reply to: ${message}`;
-  }
+// const getOpenAIResponse = async (message) => {
+//   const apiKey = process.env.OPENAI_API_KEY;
+//   if (!apiKey) {
+//     return `Mock OpenAI reply to: ${message}`;
+//   }
 
-  const endpoint = 'https://api.openai.com/v1/chat/completions';
-  const payload = {
-    model: process.env.AI_MODEL || 'gpt-4o-mini',
-    messages: [{ role: 'user', content: message }],
-    max_tokens: Number(process.env.OPENAI_MAX_TOKENS || 400),
-    temperature: Number(process.env.OPENAI_TEMPERATURE || 0.6),
-  };
+//   const endpoint = 'https://api.openai.com/v1/chat/completions';
+//   const payload = {
+//     model: process.env.AI_MODEL || 'gpt-4o-mini',
+//     messages: [{ role: 'user', content: message }],
+//     max_tokens: Number(process.env.OPENAI_MAX_TOKENS || 400),
+//     temperature: Number(process.env.OPENAI_TEMPERATURE || 0.6),
+//   };
 
-  const response = await fetchClient(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify(payload),
-  });
+//   const response = await fetchClient(endpoint, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${apiKey}`,
+//     },
+//     body: JSON.stringify(payload),
+//   });
 
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.error?.message || 'OpenAI provider failed');
-  }
+//   const data = await response.json();
+//   if (!response.ok) {
+//     throw new Error(data.error?.message || 'OpenAI provider failed');
+//   }
 
-  return data.choices?.[0]?.message?.content?.trim() || 'No response from OpenAI model';
-};
+//   return data.choices?.[0]?.message?.content?.trim() || 'No response from OpenAI model';
+// };
 
 const getAIResponse = async (message) => {
   const provider = (process.env.AI_PROVIDER || (process.env.GEMINI_API_KEY ? 'gemini' : 'openai')).toLowerCase();
