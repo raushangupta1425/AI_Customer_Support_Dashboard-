@@ -1,3 +1,13 @@
+# Project Deployment Links
+Deployment link submission:
+https://ai-customer-support-dashboard-gamma.vercel.app/
+
+Backend deployment link on render:
+https://ai-customer-support-dashboard-sw2c.onrender.com/
+
+Frontend and full project deployment link is same.
+
+
 # AI Customer Support Dashboard
 
 A full-stack web application built with React, Node.js, Express, and MongoDB. Users can register, log in, chat with an AI-powered support assistant, and view conversation history. Administrators can monitor users and chat activity from an admin dashboard.
