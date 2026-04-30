@@ -1,4 +1,4 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetchClient = globalThis.fetch || ((...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args)));
 
 const getOpenAIResponse = async (message) => {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -14,7 +14,7 @@ const getOpenAIResponse = async (message) => {
     temperature: 0.6,
   };
 
-  const response = await fetch(endpoint, {
+  const response = await fetchClient(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
