@@ -43,7 +43,7 @@ function mernChatbot(userInput) {
     };
 
     function getIntent(text) {
-        if (/\b(hi|hello|hey)\b/.test(text)) return "greeting";
+        if (/\b(hii|hi|hello|hey)\b/.test(text)) return "greeting";
         if (/\b(react|frontend|component|hook)\b/.test(text)) return "react";
         if (/\b(node|backend|server)\b/.test(text)) return "node";
         if (/\b(express|api|route)\b/.test(text)) return "express";
@@ -69,8 +69,7 @@ const getGeminiResponse = async (message) => {
   const apiKey = process.env.GEMINI_API_KEY;
   const model = process.env.GEMINI_MODEL || 'gemini-1.5-pro';
   if (!apiKey) {
-    res=mernChatbot(message);
-    return `Mock Gemini reply to: ${res}`;
+    return `Mock Gemini reply to: ${mernChatbot(message)}`;
   }
 
   const endpoint = `https://gemini.googleapis.com/v1/models/${encodeURIComponent(model)}:generate?key=${encodeURIComponent(apiKey)}`;
