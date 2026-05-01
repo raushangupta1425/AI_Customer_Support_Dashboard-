@@ -24,9 +24,8 @@ function App() {
         <nav>
           {token ? (
             <>
-              <Link to="/admin">Admin</Link>
-              <Link to="/chat">Chat</Link>
               {role === 'admin' && <Link to="/admin">Admin</Link>}
+              <Link to="/chat">Chat</Link>
               <button onClick={logout}>Logout</button>
             </>
           ) : (

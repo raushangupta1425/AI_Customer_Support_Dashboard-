@@ -9,7 +9,7 @@ function Admin() {
 
   const fetchUsers = async () => {
     try {
-      const response = await api.get('/admin/users');
+      const response = await api.get('/api/admin/users');
       setUsers(response.data.users);
     } catch (err) {
       setError(err.response?.data?.message || 'Unable to load users.');
@@ -18,7 +18,7 @@ function Admin() {
 
   const fetchChats = async (userId) => {
     try {
-      const url = userId ? `/admin/chats?userId=${userId}` : '/admin/chats';
+      const url = userId ? `/api/admin/chats?userId=${userId}` : '/api/admin/chats';
       const response = await api.get(url);
       setChats(response.data.chats);
     } catch (err) {
@@ -34,19 +34,18 @@ function Admin() {
   const removeUser = async (userId) => {
     if (!window.confirm('Delete this user and their chats?')) return;
     try {
-      await api.delete(`/admin/users/${userId}`);
+      await api.delete(`/api/admin/users/${userId}`);
       fetchUsers();
       fetchChats();
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to delete user.');
     }
   };
-
+  
   const removeChat = async (chatId) => {
     if (!window.confirm('Delete this chat record?')) return;
     try {
-      await api.delete(`/admin/chats/${chatId}`);
-      fetchChats(selectedUser);
+      await api.delete(`/api/admin/chats/${chatId}`);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to delete chat.');
     }
